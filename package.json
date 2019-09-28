@@ -1,10 +1,11 @@
 {
   "name": "@jych/public-transport-lib",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A JS library for the 'transport.opendata.ch' public transport API.",
   "bin": "src/inbound/cli/index.js",
+  "main": "src/inbound/lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --recursive",
     "publish-please": "publish-please",
     "prepublishOnly": "publish-please guard"
   },
@@ -26,6 +27,8 @@
     "request-promise": "^4.2.4"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
     "publish-please": "^5.5.1"
   }
 }
