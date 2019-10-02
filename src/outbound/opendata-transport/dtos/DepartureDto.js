@@ -16,6 +16,15 @@ module.exports = class DepartureDto {
         return new DepartureDto(currentStation, destination, departureTime, destinationArrivalTime);
     }
 
+    static fromConnectionJson(json) {
+        const currentStation = StationDto.fromJson(get(json, 'from.station'));
+        const destination = StationDto.fromJson(get(json, 'to.station'));
+        const departureTime = get(json, 'from.departureTimestamp');
+        const destinationArrivalTime = get(json, 'to.arrivalTimestamp');
+
+        return new DepartureDto(currentStation, destination, departureTime, destinationArrivalTime);
+    }
+
     /**
      * @param currentStation {StationDto}
      * @param destination {StationDto}

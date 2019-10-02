@@ -57,4 +57,27 @@ module.exports = class OpendataTimetableAdaptor extends TimetablePort {
             .then( stationboard => stationboard.map( entry => DepartureDto.fromJson(entry) )
                 .map( dto => dto.toEntity() ) );
     }
+
+    /**
+     * @see TimetablePort.getConnections
+     * @returns {Promise<void>}
+     */
+    async getConnections(from, to, limit = 10) {
+
+        const requestOptions = {
+            uri: 'http://transport.opendata.ch/v1/connections',
+            qs: {
+                'limit': limit,
+                'from': from.getId(),
+                'to': to.getId(),
+                'direct': true
+            },
+            json: true
+        };
+
+        return rp(requestOptions)
+            .then( response => ( response.connections || [] ) )
+            .then( connections => connections.map( entry => DepartureDto.fromConnectionJson(entry) )
+                .map( dto => dto.toEntity() ) );
+    }
 };

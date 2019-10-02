@@ -20,4 +20,14 @@ module.exports = class TimetablePort {
      * @returns {Promise<Array<Departure>>}
      */
     async getStationDepartures(station, limit = 10) { throw new Error("Unimplemented [TimetablePort]"); }
+
+    /**
+     * Get connections between two stations.
+     * The given stations do not have to been the terminus, but they must both be list on the stop list.
+     * @param from {Station}
+     * @param to {Station}
+     * @param limit {Number}
+     * @returns {Promise<Array<Departure>>}
+     */
+    async getConnections(from, to, limit = 10) { throw new Error("Unimplemented [TimetablePort]"); }
 };
