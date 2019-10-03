@@ -1,18 +1,16 @@
 #!/usr/bin/env node
 'use strict';
 
-const { promisify } = require('util');
-const version = require('version');
 const commander = require('commander');
 
-const getVersion = promisify(version.fetch);
+const { version } = require('./../../../package.json');
 
 (async function cli() {
 
     const program = new commander.Command();
 
     program
-        .version(await getVersion())
+        .version(version)
         .command(
             'find-station [options] <query>',
             'search for a station',
