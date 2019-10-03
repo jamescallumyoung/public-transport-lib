@@ -28,4 +28,15 @@ module.exports = class PublicTransportLib {
     async getDepartures(station, limit) {
         return this.timetablePort.getStationDepartures(station, limit);
     }
+
+    /**
+     *
+     * @param from {Station}
+     * @param to {Station}
+     * @param limit {Number}
+     * @returns {Promise<Array<Departure>>}
+     */
+    async getConnections(from, to, limit) {
+        return this.timetablePort.getConnections(from, to, limit);
+    }
 };

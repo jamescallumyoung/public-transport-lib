@@ -60,7 +60,7 @@ module.exports = class OpendataTimetableAdaptor extends TimetablePort {
 
     /**
      * @see TimetablePort.getConnections
-     * @returns {Promise<void>}
+     * @returns {Promise<Array<Departure>>}
      */
     async getConnections(from, to, limit = 10) {
 
