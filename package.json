@@ -1,6 +1,6 @@
 {
   "name": "@jych/public-transport-lib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A JS library for the 'transport.opendata.ch' public transport API.",
   "bin": {
     "transporter": "src/inbound/cli/index.js"
@@ -18,6 +18,14 @@
     "ch",
     "zh"
   ],
+  "files": [
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/jych/public-transport-lib.git"
+  },
+  "homepage": "https://gitlab.com/jych/public-transport-lib",
   "author": "James Young <hello@jamesyoung.ch>",
   "license": "MIT",
   "dependencies": {
