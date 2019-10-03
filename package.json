@@ -1,8 +1,10 @@
 {
   "name": "@jych/public-transport-lib",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A JS library for the 'transport.opendata.ch' public transport API.",
-  "bin": "src/inbound/cli/index.js",
+  "bin": {
+    "transporter": "src/inbound/cli/index.js"
+  },
   "main": "src/inbound/lib/index.js",
   "scripts": {
     "cli": "node src/inbound/cli/index.js",
@@ -25,7 +27,8 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "version": "^0.1.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",

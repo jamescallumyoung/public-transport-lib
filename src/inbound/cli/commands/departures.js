@@ -4,21 +4,22 @@
 const commander = require('commander');
 const { get } = require('lodash');
 
+const OpendataTimetableAdaptor = require('../../../outbound/opendata-transport/OpendataTimetableAdaptor');
 const OpendataStationAdaptor = require('../../../outbound/opendata-transport/OpendataStationAdaptor');
 
 const logFn = require('../tools/log');
 const logFoundFn = require('../tools/log-found');
+const selectStation = require('../tools/prompt-for-correct-station');
 
 (async function cli() {
 
     const program = new commander.Command();
 
     program
-        .name('transporter find-station')
+        .name('transporter departures')
         .usage('[options] <query>')
         .arguments('<query>')
-        .option('-j, --json', 'output results as JSON', )
-        // .option('-l, --limit <number>', 'limit the number of results to return', )
+        .option('--json', 'output results as JSON', )
         .option('-q, --quiet', 'quiet; only output results', )
         .parse(process.argv);
 
@@ -32,18 +33,19 @@ const logFoundFn = require('../tools/log-found');
         process.exit(1);
     }
 
-    log(`🔍 Searching for a station with name ${JSON.stringify(query)}`);
+    log(`🔍 Searching for Departures from Station ${JSON.stringify(query)}`);
 
     const stationPort = new OpendataStationAdaptor();
+    const timetablePort = new OpendataTimetableAdaptor();
 
     return stationPort.searchForStations(query)
-        // .then( stations => (program.limit) ? slice(stations, 0, program.limit+1) : stations )
         .then( logFound )
-        .then( stations => {
-            log( (program.json)
-                ? JSON.stringify(stations, null, 3)
-                : stations.map( station => station.toString() ).join('\n') );
-            return stations;
-        } );
+        .then( selectStation )
+        .then( station => timetablePort.getStationDepartures(station, program.limit) )
+        .then( logFound )
+        .then( departures => (program.json)
+            ? JSON.stringify(departures, null, 3)
+            : departures.map( departure => departure.toString() ).join('\n') )
+        .then(console.log);
 
 })();
